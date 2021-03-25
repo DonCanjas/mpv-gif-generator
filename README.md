@@ -8,11 +8,13 @@ This is a port of his gif generator script for Windows.
 # Requirements 
 - Windows
 - mpv
-- ffmpeg with libass enabled–as long as you're using the zeronoe builds you're good!
+- ffmpeg with libass enabled
  
 # Installation
 
 First of all, you must make sure `ffmpeg` is in your `%PATH%` and accesible via your command line. After ensuring this, clone or download as zip. Then, head to `%APPDATA%/mpv/scripts` and place `mpv-gif.lua` in there; if neither `%APPDATA%/mpv` nor `%APPDATA%/mpv/scripts` exist, you will have to create them. It's as easy as that!
+
+[How to install ffmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows)
 
 # Configuration
 
