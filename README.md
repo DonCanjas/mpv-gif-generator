@@ -1,6 +1,6 @@
 # mpv-gif-generator *for windows*
 
-![Yuri On Ice Example](https://i.imgur.com/6wIylNl.gif)
+![teste](https://imgur.com/qkPM0BX.gif)
 
 Original script created by [Ruin0x11](https://github.com/Ruin0x11), which you can find [here](https://gist.github.com/Ruin0x11/8fae0a9341b41015935f76f913b28d2a).
 This is a port of his gif generator script for Windows.
