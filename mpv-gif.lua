@@ -33,7 +33,7 @@ end
 filters=string.format("fps=%s,zscale='trunc(ih*dar/2)*2:trunc(ih/2)*2':f=spline36,setsar=1/1,zscale=%s:-1:f=spline36", fps, options.rez) --change spline to lanczos depending on preference
 
 -- Setup output directory
-output_directory=string.gsub(options.dir, '\"', '')
+output_directory=options.dir
 
 start_time = -1
 end_time = -1
@@ -135,7 +135,7 @@ function make_gif_internal(burn_subtitles)
     os.execute(args)
 
     -- then, make the gif
-    local file_path = output_directory .. "/" .. filename
+    local filename = mp.get_property("filename/no-ext")
     local file_path = output_directory .. filename
 
     -- increment filename
