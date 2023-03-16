@@ -30,10 +30,10 @@ end
 
 -- Set this to the filters to pass into ffmpeg's -vf option.
 -- filters="fps=24,scale=320:-1:flags=spline"
-filters=string.format("fps=%s,zscale='trunc(ih*dar/2)*2:trunc(ih/2)*2':f=spline36,setsar=1/1,zscale=%s:-1:f=spline36", fps, options.rez) --change spline to lanczos depending on preference
+filters=string.format("fps=%s,scale='trunc(ih*dar/2)*2:trunc(ih/2)*2':flags=spline,setsar=1/1,scale=%s:-1:flags=spline", fps, options.rez) --change spline to lanczos depending on preference
 
 -- Setup output directory
-output_directory=options.dir
+output_directory=string.gsub(options.dir, '\"', '')
 
 start_time = -1
 end_time = -1
@@ -136,7 +136,7 @@ function make_gif_internal(burn_subtitles)
 
     -- then, make the gif
     local filename = mp.get_property("filename/no-ext")
-    local file_path = output_directory .. filename
+    local file_path = output_directory .. "/" .. filename
 
     -- increment filename
     for i=0,999 do
@@ -160,8 +160,13 @@ function make_gif_internal(burn_subtitles)
     args = string.format('ffmpeg -v warning -ss %s %s -t %s -i "%s" -i "%s" -lavfi "%s [x]; [x][1:v] paletteuse" -y "%s"', position, copyts, duration, esc(pathname), esc(palette), esc(trim_filters), esc(gifname))
     os.execute(args)
 
-    msg.info("GIF created.")
-    mp.osd_message("GIF created.")
+    local ok, err, code = os.rename(gifname, gifname)
+	if ok then
+	    msg.info("GIF created: " .. gifname)
+	    mp.osd_message("GIF created: " .. gifname)
+	else
+	    mp.osd_message("Error creating file, check CLI for more info.")
+	end
 end
 
 function set_gif_start()
